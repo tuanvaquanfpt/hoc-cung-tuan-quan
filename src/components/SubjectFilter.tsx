@@ -5,16 +5,25 @@ import { useState } from "react";
 const SubjectFilter = () => {
   const [selectedSubject, setSelectedSubject] = useState("all");
 
-  const subjects = [
-    { id: "all", name: "Tất cả môn", color: "bg-primary" },
-    { id: "pro192", name: "PRO192 - Java", color: "bg-orange-500" },
-    { id: "csd201", name: "CSD201 - Cấu trúc dữ liệu", color: "bg-purple-500" },
-    { id: "nwc204", name: "NWC204 - Mạng máy tính", color: "bg-blue-500" },
-    { id: "prj301", name: "PRJ301 - Java Web", color: "bg-green-500" },
-    { id: "dbi202", name: "DBI202 - Cơ sở dữ liệu", color: "bg-red-500" },
-    { id: "maw211", name: "MAW211 - Mobile App", color: "bg-indigo-500" },
-    { id: "swp391", name: "SWP391 - Software Project", color: "bg-yellow-600" },
-    { id: "iot102", name: "IOT102 - Internet of Things", color: "bg-cyan-500" }
+  const semesterSubjects = {
+    "semester1": ["SSL101c", "PRF192", "PFP191", "CSI106", "CEA201", "MAE101"],
+    "semester2": ["PRO192", "MAD101", "OSG202", "NWC204", "WED201c", "SSG104", "OBE102c"],
+    "semester3": ["CSD201", "DBI202", "JPD113", "WED201c"],
+    "semester4": ["PRJ301", "PRJ302", "JPD123", "IOT102", "MAS291", "SWE201c"],
+    "semester5": ["SWR302", "SWT301", "PRN212", "ITE302c"],
+    "semester6": ["SWD392", "SYB302c", "PMG201c", "PRU212"],
+    "semester7": ["MLN111", "MLN121", "WDU203c"]
+  };
+
+  const semesterFilters = [
+    { id: "all", name: "Tất cả học kỳ", color: "bg-primary" },
+    { id: "semester1", name: "Học kỳ 1", color: "bg-blue-500" },
+    { id: "semester2", name: "Học kỳ 2", color: "bg-green-500" },
+    { id: "semester3", name: "Học kỳ 3", color: "bg-purple-500" },
+    { id: "semester4", name: "Học kỳ 4", color: "bg-orange-500" },
+    { id: "semester5", name: "Học kỳ 5", color: "bg-red-500" },
+    { id: "semester6", name: "Học kỳ 6", color: "bg-indigo-500" },
+    { id: "semester7", name: "Học kỳ 7", color: "bg-cyan-500" }
   ];
 
   const servicesBySubject = {
@@ -42,47 +51,42 @@ const SubjectFilter = () => {
           </p>
         </div>
 
-        {/* Subject Filter Tags */}
+        {/* Semester Filter Tags */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {subjects.map((subject) => (
+          {semesterFilters.map((semester) => (
             <Button
-              key={subject.id}
-              variant={selectedSubject === subject.id ? "default" : "outline"}
+              key={semester.id}
+              variant={selectedSubject === semester.id ? "default" : "outline"}
               size="sm"
-              onClick={() => setSelectedSubject(subject.id)}
+              onClick={() => setSelectedSubject(semester.id)}
               className={`
-                ${selectedSubject === subject.id 
-                  ? `${subject.color} text-white hover:opacity-90` 
+                ${selectedSubject === semester.id 
+                  ? `${semester.color} text-white hover:opacity-90` 
                   : 'hover:bg-primary/10'
                 }
                 transition-all duration-300
               `}
             >
-              {subject.name}
+              {semester.name}
             </Button>
           ))}
         </div>
 
-        {/* Services for Selected Subject */}
-        {selectedSubject !== "all" && servicesBySubject[selectedSubject] && (
-          <div className="max-w-4xl mx-auto">
+        {/* Subjects for Selected Semester */}
+        {selectedSubject !== "all" && semesterSubjects[selectedSubject] && (
+          <div className="max-w-6xl mx-auto">
             <h3 className="text-xl font-semibold mb-6 text-center">
-              Dịch vụ hỗ trợ cho môn {subjects.find(s => s.id === selectedSubject)?.name}
+              Các môn học trong {semesterFilters.find(s => s.id === selectedSubject)?.name}
             </h3>
-            <div className="grid md:grid-cols-3 gap-4">
-              {servicesBySubject[selectedSubject].map((service, index) => (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {semesterSubjects[selectedSubject].map((subject, index) => (
                 <div 
                   key={index}
-                  className="bg-white rounded-lg p-4 shadow-soft hover:shadow-medium transition-all duration-300 hover:-translate-y-1"
+                  className="bg-white rounded-lg p-4 shadow-soft hover:shadow-medium transition-all duration-300 hover:-translate-y-1 text-center"
                 >
-                  <div className="flex items-center justify-between mb-3">
-                    <h4 className="font-medium text-sm">{service}</h4>
-                    <Badge variant="secondary" className="text-xs">
-                      Có sẵn
-                    </Badge>
-                  </div>
+                  <div className="font-semibold text-primary mb-2">{subject}</div>
                   <Button size="sm" variant="outline" className="w-full text-xs">
-                    Xem chi tiết
+                    Xem dịch vụ
                   </Button>
                 </div>
               ))}
@@ -93,26 +97,23 @@ const SubjectFilter = () => {
         {selectedSubject === "all" && (
           <div className="text-center">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-              {Object.keys(servicesBySubject).map((subjectId) => {
-                const subject = subjects.find(s => s.id === subjectId);
-                return (
-                  <div 
-                    key={subjectId}
-                    className="bg-white rounded-lg p-4 shadow-soft hover:shadow-medium transition-all duration-300 cursor-pointer"
-                    onClick={() => setSelectedSubject(subjectId)}
-                  >
-                    <div className={`w-12 h-12 mx-auto mb-3 rounded-lg ${subject?.color} flex items-center justify-center`}>
-                      <span className="text-white font-bold text-lg">
-                        {subject?.name.split(' ')[0]}
-                      </span>
-                    </div>
-                    <h4 className="font-medium text-sm mb-2">{subject?.name}</h4>
-                    <p className="text-xs text-muted-foreground">
-                      {servicesBySubject[subjectId].length} dịch vụ
-                    </p>
+              {semesterFilters.slice(1).map((semester) => (
+                <div 
+                  key={semester.id}
+                  className="bg-white rounded-lg p-4 shadow-soft hover:shadow-medium transition-all duration-300 cursor-pointer"
+                  onClick={() => setSelectedSubject(semester.id)}
+                >
+                  <div className={`w-12 h-12 mx-auto mb-3 rounded-lg ${semester.color} flex items-center justify-center`}>
+                    <span className="text-white font-bold text-lg">
+                      {semester.name.replace('Học kỳ ', 'K')}
+                    </span>
                   </div>
-                );
-              })}
+                  <h4 className="font-medium text-sm mb-2">{semester.name}</h4>
+                  <p className="text-xs text-muted-foreground">
+                    {semesterSubjects[semester.id]?.length || 0} môn học
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         )}
