@@ -16,11 +16,12 @@ const ServicesSection = () => {
     {
       id: 1,
       icon: GraduationCap,
-      title: "Hỗ trợ chứng chỉ Coursera",
+      title: "Rush Coursera",
       description: "Hướng dẫn chọn khóa học, theo dõi tiến độ, hỗ trợ làm bài và lấy chứng chỉ nhanh chóng.",
       color: "text-primary",
       bgColor: "bg-primary/10",
-      cta: "Tư vấn Coursera miễn phí",
+      cta: "Đặt dịch vụ",
+      price: "120-150k",
       features: ["Tư vấn khóa học phù hợp", "Hỗ trợ làm bài tập", "Đảm bảo có chứng chỉ"]
     },
     {
@@ -30,7 +31,8 @@ const ServicesSection = () => {
       description: "Cung cấp đề thi cũ, bài giải mẫu, tài liệu PDF, và mã nguồn các môn lập trình, cơ sở dữ liệu, mạng,...",
       color: "text-secondary",
       bgColor: "bg-secondary/10",
-      cta: "Xem tài liệu ngay",
+      cta: "Đặt dịch vụ",
+      price: "50-70k",
       features: ["Đề thi các năm trước", "Source code mẫu", "Tài liệu chất lượng cao"]
     },
     {
@@ -40,32 +42,42 @@ const ServicesSection = () => {
       description: "Các khóa học rút gọn (2–5 buổi) giúp ôn thi hiệu quả, luyện đề và hiểu bài nhanh.",
       color: "text-primary",
       bgColor: "bg-primary/10",
-      cta: "Đăng ký ôn cấp tốc",
+      cta: "Đặt dịch vụ",
+      price: "100k",
       features: ["Lộ trình ôn tập tối ưu", "Luyện đề thi thực tế", "Giải đáp thắc mắc 24/7"]
     },
     {
       id: 4,
       icon: Video,
-      title: "Media & Trình bày",
-      description: "Dịch vụ toàn diện về media: edit video, viết kịch bản, thiết kế slide chuyên nghiệp.",
+      title: "Support Luk",
+      description: "Dịch vụ toàn diện: làm project, check 2, debate với nhiều gói lựa chọn.",
       color: "text-secondary",
       bgColor: "bg-secondary/10",
-      cta: "Liên hệ team Media",
-      features: ["Edit video chuyên nghiệp", "Viết kịch bản sáng tạo", "Thiết kế slide đẹp mắt"],
+      cta: "Đặt dịch vụ",
+      price: "10-90k",
+      features: ["Làm project", "Check 2 (4 gói)", "Dịch vụ debate"],
       subServices: [
-        { icon: Video, name: "Edit video" },
-        { icon: FileText, name: "Viết kịch bản" },
-        { icon: Presentation, name: "Thiết kế slide" }
+        { icon: Code, name: "Làm project", price: "Liên hệ" },
+        { icon: FileText, name: "Check 2", 
+          options: [
+            { name: "Full combo", price: "90k" },
+            { name: "Chỉ kịch bản", price: "40k" },
+            { name: "Chỉ edit", price: "70k" },
+            { name: "Làm transcript", price: "10k" }
+          ]
+        },
+        { icon: Presentation, name: "Debate", price: "Liên hệ" }
       ]
     },
     {
       id: 5,
       icon: Code,
-      title: "Hỗ trợ Project, Lab, bài tập lớn",
+      title: "Hỗ trợ Lab & Project",
       description: "Hỗ trợ làm project, viết báo cáo, hoàn thiện bài lab theo môn học cụ thể (Java, Python, Web, DB,...).",
       color: "text-primary",
       bgColor: "bg-primary/10",
-      cta: "Yêu cầu hỗ trợ",
+      cta: "Đặt dịch vụ",
+      price: "100-500k",
       features: ["Hỗ trợ code project", "Viết báo cáo chi tiết", "Debug và tối ưu hóa"]
     }
   ];
@@ -104,6 +116,11 @@ const ServicesSection = () => {
                 </CardHeader>
 
                 <CardContent className="space-y-4">
+                  {/* Price */}
+                  <div className="text-center bg-accent/20 rounded-lg p-3">
+                    <span className="text-lg font-bold text-primary">{service.price}</span>
+                  </div>
+
                   {/* Features */}
                   <ul className="space-y-2">
                     {service.features.map((feature, idx) => (
@@ -114,15 +131,28 @@ const ServicesSection = () => {
                     ))}
                   </ul>
 
-                  {/* Sub-services for Media */}
+                  {/* Sub-services with pricing */}
                   {service.subServices && (
-                    <div className="flex justify-center gap-4 py-2">
+                    <div className="space-y-3 border-t pt-3">
                       {service.subServices.map((sub, idx) => {
                         const SubIcon = sub.icon;
                         return (
-                          <div key={idx} className="flex flex-col items-center text-xs text-muted-foreground">
-                            <SubIcon className="w-5 h-5 mb-1" />
-                            <span>{sub.name}</span>
+                          <div key={idx} className="text-xs">
+                            <div className="flex items-center gap-2 mb-1">
+                              <SubIcon className="w-4 h-4" />
+                              <span className="font-medium">{sub.name}</span>
+                              {sub.price && <span className="text-primary font-bold ml-auto">{sub.price}</span>}
+                            </div>
+                            {sub.options && (
+                              <div className="ml-6 space-y-1">
+                                {sub.options.map((option, optIdx) => (
+                                  <div key={optIdx} className="flex justify-between text-muted-foreground">
+                                    <span>• {option.name}</span>
+                                    <span className="text-primary font-medium">{option.price}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
                           </div>
                         );
                       })}
@@ -132,6 +162,10 @@ const ServicesSection = () => {
                   <Button 
                     variant={service.id % 2 === 1 ? "default" : "secondary"} 
                     className="w-full"
+                    onClick={() => {
+                      // Open booking form
+                      document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
                   >
                     {service.cta}
                   </Button>
