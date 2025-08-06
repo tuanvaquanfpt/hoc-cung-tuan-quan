@@ -8,10 +8,10 @@ const Navigation = () => {
 
   const navItems = [
     { icon: Home, label: "Trang chủ", href: "#" },
-    { icon: BookOpen, label: "Khóa học", href: "#services" },
-    { icon: Star, label: "Đánh giá", href: "#testimonials" },
+    { icon: BookOpen, label: "Khóa học", href: "#services", action: () => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }) },
+    { icon: Star, label: "Đánh giá", href: "#reviews", action: () => document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth' }) },
     { icon: MessageCircle, label: "Đặt dịch vụ", href: "#booking-form" },
-    { icon: Phone, label: "Liên hệ", href: "#contact" }
+    { icon: Phone, label: "Liên hệ", href: "https://www.facebook.com/tuanvaquan", external: true }
   ];
 
   return (
@@ -29,7 +29,7 @@ const Navigation = () => {
               <h1 className="text-lg font-bold bg-gradient-primary bg-clip-text text-transparent">
                 Tuấn & Quân
               </h1>
-              <p className="text-xs text-muted-foreground">Thuần Lại Lập Trình</p>
+              
             </div>
           </div>
 
@@ -37,15 +37,26 @@ const Navigation = () => {
           <div className="hidden md:flex items-center gap-6">
             {navItems.map((item, index) => {
               const IconComponent = item.icon;
-              return (
+              return item.external ? (
                 <a
                   key={index}
                   href={item.href}
-                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors duration-200 story-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
                 >
                   <IconComponent className="w-4 h-4" />
                   {item.label}
                 </a>
+              ) : (
+                <button
+                  key={index}
+                  onClick={item.action || (() => document.querySelector(item.href)?.scrollIntoView({ behavior: 'smooth' }))}
+                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+                >
+                  <IconComponent className="w-4 h-4" />
+                  {item.label}
+                </button>
               );
             })}
             <Button 
@@ -74,16 +85,30 @@ const Navigation = () => {
             <div className="p-4 space-y-4">
               {navItems.map((item, index) => {
                 const IconComponent = item.icon;
-                return (
+                return item.external ? (
                   <a
                     key={index}
                     href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors duration-200"
                     onClick={() => setIsOpen(false)}
                   >
                     <IconComponent className="w-5 h-5 text-primary" />
                     <span className="text-sm">{item.label}</span>
                   </a>
+                ) : (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      item.action ? item.action() : document.querySelector(item.href)?.scrollIntoView({ behavior: 'smooth' });
+                      setIsOpen(false);
+                    }}
+                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors duration-200 w-full text-left"
+                  >
+                    <IconComponent className="w-5 h-5 text-primary" />
+                    <span className="text-sm">{item.label}</span>
+                  </button>
                 );
               })}
               <Button 

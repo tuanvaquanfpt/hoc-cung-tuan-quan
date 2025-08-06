@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
@@ -8,10 +9,18 @@ import {
   Code,
   FileText,
   Edit3,
-  Presentation
+  Presentation,
+  ChevronDown,
+  ChevronUp
 } from "lucide-react";
 
 const ServicesSection = () => {
+  const [expandedService, setExpandedService] = useState<number | null>(null);
+
+  const toggleService = (serviceId: number) => {
+    setExpandedService(expandedService === serviceId ? null : serviceId);
+  };
+
   const services = [
     {
       id: 1,
@@ -163,21 +172,38 @@ const ServicesSection = () => {
                     ))}
                   </ul>
 
-                  {/* Sub-services with pricing */}
+                  {/* Expandable Sub-services */}
                   {service.subServices && (
-                    <div className="space-y-3 border-t pt-3">
-                      {service.subServices.map((sub, idx) => {
-                        const SubIcon = sub.icon;
-                        return (
-                          <div key={idx} className="text-xs">
-                            <div className="flex items-center gap-2 mb-1">
-                              <SubIcon className="w-4 h-4" />
-                              <span className="font-medium">{sub.name}</span>
-                              {sub.price && <span className="text-primary font-bold ml-auto">{sub.price}</span>}
-                            </div>
-                          </div>
-                        );
-                      })}
+                    <div className="border-t pt-3">
+                      <Button 
+                        variant="ghost" 
+                        size="sm"
+                        className="w-full justify-between mb-2"
+                        onClick={() => toggleService(service.id)}
+                      >
+                        <span className="text-sm font-medium">Xem chi tiết các môn</span>
+                        {expandedService === service.id ? 
+                          <ChevronUp className="w-4 h-4" /> : 
+                          <ChevronDown className="w-4 h-4" />
+                        }
+                      </Button>
+                      
+                      {expandedService === service.id && (
+                        <div className="space-y-3 animate-fade-in">
+                          {service.subServices.map((sub, idx) => {
+                            const SubIcon = sub.icon;
+                            return (
+                              <div key={idx} className="text-xs bg-muted/30 p-3 rounded-lg">
+                                <div className="flex items-center gap-2">
+                                  <SubIcon className="w-4 h-4 text-primary" />
+                                  <span className="font-medium">{sub.name}</span>
+                                  {sub.price && <span className="text-primary font-bold ml-auto">{sub.price}</span>}
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
                     </div>
                   )}
 
