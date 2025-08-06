@@ -17,17 +17,18 @@ const ContactSection = () => {
   const contactMethods = [
     {
       icon: MessageCircle,
-      title: "Messenger",
-      description: "Chat trực tiếp với team",
-      value: "m.me/tuanquan.study",
+      title: "Facebook",
+      description: "Tuấn và Quân",
+      value: "https://www.facebook.com/tuanvaquan",
       color: "text-blue-600",
-      bgColor: "bg-blue-100"
+      bgColor: "bg-blue-100",
+      link: "https://www.facebook.com/tuanvaquan"
     },
     {
       icon: MessageCircle,
       title: "Zalo",
       description: "Liên hệ qua Zalo",
-      value: "0123.456.789",
+      value: "0375020190",
       color: "text-blue-500",
       bgColor: "bg-blue-50"
     },
@@ -35,17 +36,18 @@ const ContactSection = () => {
       icon: Mail,
       title: "Gmail",
       description: "Gửi email cho chúng mình",
-      value: "contact@tuanquan.study",
+      value: "lequan12305@gmail.com",
       color: "text-red-500",
       bgColor: "bg-red-50"
     },
     {
-      icon: Phone,
-      title: "Hotline",
-      description: "Gọi điện tư vấn miễn phí",
-      value: "0123.456.789",
-      color: "text-green-600",
-      bgColor: "bg-green-50"
+      icon: MessageCircle,
+      title: "YouTube",
+      description: "Kênh YouTube của chúng mình",
+      value: "Tuấn và Quân FPTU",
+      color: "text-red-600",
+      bgColor: "bg-red-100",
+      link: "https://www.youtube.com/@tuanvaquanfptu"
     }
   ];
 
@@ -90,9 +92,10 @@ const ContactSection = () => {
               {contactMethods.map((method, index) => {
                 const IconComponent = method.icon;
                 return (
-                  <Card 
+                   <Card 
                     key={index}
                     className="group hover:shadow-medium transition-all duration-300 hover:-translate-y-1 cursor-pointer border-0 bg-gradient-card"
+                    onClick={() => method.link && window.open(method.link, '_blank')}
                   >
                     <CardContent className="p-4">
                       <div className="flex items-center gap-3 mb-3">

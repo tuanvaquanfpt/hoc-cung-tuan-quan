@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-students.jpg";
+import avatarImage from "@/assets/avatar-tuan-quan.jpg";
 
 const HeroSection = () => {
   return (
@@ -9,36 +10,58 @@ const HeroSection = () => {
           {/* Text Content */}
           <div className="text-center lg:text-left space-y-8 animate-fade-in">
             <div className="space-y-4">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-                <span className="bg-gradient-primary bg-clip-text text-transparent">
-                  Tuấn & Quân
-                </span>
-                <br />
-                <span className="text-2xl md:text-3xl lg:text-4xl">
-                  Người đồng hành học tập đáng tin cậy
-                </span>
-              </h1>
+              <div className="flex items-center gap-4 justify-center lg:justify-start mb-6">
+                <img 
+                  src={avatarImage} 
+                  alt="Tuấn và Quân Avatar" 
+                  className="w-20 h-20 rounded-full object-cover border-4 border-primary/20 shadow-lg"
+                />
+                <div>
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+                    <span className="bg-gradient-primary bg-clip-text text-transparent">
+                      Tuấn & Quân
+                    </span>
+                  </h1>
+                  <p className="text-lg md:text-xl text-muted-foreground">
+                    Thuần Lại Lập Trình
+                  </p>
+                </div>
+              </div>
+              
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center lg:text-left">
+                🚀 Cộng đồng Tự học Lập trình 1000+ thành viên
+              </h2>
               
               <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto lg:mx-0">
-                Hỗ trợ sinh viên đại học trong học tập, ôn thi và kỹ năng mềm – từ A đến Z.
-                Chúng mình luôn sẵn sàng đồng hành cùng bạn trên con đường học tập!
+                Chia sẻ kiến thức lập trình từ cơ bản đến nâng cao. 
+                Tham gia miễn phí, nhận tài liệu độc quyền & hỗ trợ học tập 1-1. Tham gia sau khi đăng ký kênh YouTube!
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button variant="hero" size="xl" className="shadow-strong">
+              <Button 
+                variant="hero" 
+                size="xl" 
+                className="shadow-strong"
+                onClick={() => document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' })}
+              >
                 🎯 Đặt dịch vụ ngay
               </Button>
-              <Button variant="outline" size="xl" className="border-primary text-primary hover:bg-primary hover:text-white">
-                📞 Tư vấn miễn phí
+              <Button 
+                variant="outline" 
+                size="xl" 
+                className="border-primary text-primary hover:bg-primary hover:text-white"
+                onClick={() => window.open('https://www.youtube.com/@tuanvaquanfptu', '_blank')}
+              >
+                🚀 Đăng ký kênh & Tham gia ngay
               </Button>
             </div>
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-6 pt-8">
               <div className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-primary">500+</div>
-                <div className="text-sm text-muted-foreground">Sinh viên đã hỗ trợ</div>
+                <div className="text-2xl md:text-3xl font-bold text-primary">1000+</div>
+                <div className="text-sm text-muted-foreground">Thành viên cộng đồng</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl md:text-3xl font-bold text-secondary">98%</div>

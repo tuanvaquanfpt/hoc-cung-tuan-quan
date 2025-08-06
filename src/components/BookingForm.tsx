@@ -29,20 +29,36 @@ const BookingForm = () => {
   });
 
   const services = [
-    { value: "rush-coursera", label: "Rush Coursera (120-150k)", price: "120-150k" },
-    { value: "tai-lieu", label: "Tài liệu & Source Code (50-70k)", price: "50-70k" },
-    { value: "khoa-hoc", label: "Khóa học cấp tốc online (100k)", price: "100k" },
-    { value: "support-luk", label: "Support Luk (10-90k)", price: "10-90k" },
+    { value: "rush-coursera", label: "Rush Coursera (50-130k)", price: "50-130k" },
+    { value: "src-on-fe", label: "SRC ôn FE (60k)", price: "60k" },
+    { value: "khoa-hoc", label: "Khóa học cấp tốc online (120k/môn)", price: "120k/môn" },
+    { value: "support-luk-project", label: "Support Luk - Làm Project (Liên hệ)", price: "Liên hệ" },
+    { value: "support-luk-check2", label: "Support Luk - Check 2 (10-90k)", price: "10-90k" },
+    { value: "support-luk-debate", label: "Support Luk - Debate (Liên hệ)", price: "Liên hệ" },
     { value: "lab-project", label: "Hỗ trợ Lab & Project (100-500k)", price: "100-500k" }
   ];
 
-  const supportLukOptions = [
-    { value: "lam-project", label: "Làm project (Liên hệ)" },
+  const rushCourseraOptions = [
+    { value: "wed201", label: "WED201 (130k)" },
+    { value: "ssl101", label: "SSL101 (130k)" },
+    { value: "csi106", label: "CSI106 (50k)" },
+    { value: "obe102", label: "OBE102 (70k)" }
+  ];
+
+  const khoaHocOptions = [
+    { value: "mad101", label: "MAD101 (120k)" },
+    { value: "mae101", label: "MAE101 (120k)" },
+    { value: "mas291", label: "MAS291 (120k)" },
+    { value: "pro192", label: "PRO192 (120k)" },
+    { value: "prf192", label: "PRF192 (120k)" },
+    { value: "wed201-course", label: "WED201 (120k)" }
+  ];
+
+  const supportLukCheck2Options = [
     { value: "check2-full", label: "Check 2 - Full combo (90k)" },
     { value: "check2-script", label: "Check 2 - Chỉ kịch bản (40k)" },
     { value: "check2-edit", label: "Check 2 - Chỉ edit (70k)" },
-    { value: "check2-transcript", label: "Check 2 - Làm transcript (10k)" },
-    { value: "debate", label: "Debate (Liên hệ)" }
+    { value: "check2-transcript", label: "Check 2 - Làm transcript (10k)" }
   ];
 
   const bankInfo = {
@@ -175,7 +191,13 @@ const BookingForm = () => {
 
               <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
                 <p className="text-sm text-blue-700 dark:text-blue-300">
-                  <strong>Lưu ý:</strong> Sau khi chuyển khoản, vui lòng chụp ảnh bill và gửi cho chúng mình qua các kênh liên hệ để được hỗ trợ nhanh nhất!
+                  <strong>Nội dung chuyển khoản:</strong> Tên + Số điện thoại + Dịch vụ
+                </p>
+                <p className="text-xs text-blue-600 dark:text-blue-400 mt-2">
+                  <strong>Lưu ý:</strong> Sau khi chuyển khoản, vui lòng chụp ảnh bill và gửi cho chúng mình qua Zalo 0375020190 hoặc Facebook để được hỗ trợ nhanh nhất!
+                </p>
+                <p className="text-xs text-red-500 mt-2">
+                  ⚠️ Nếu có vấn đề về thanh toán, hãy liên hệ admin để được hỗ trợ
                 </p>
               </div>
 
@@ -279,19 +301,63 @@ const BookingForm = () => {
                   </Select>
                 </div>
 
-                {/* Support Luk sub-options */}
-                {bookingData.serviceType === "support-luk" && (
+                {/* Rush Coursera sub-options */}
+                {bookingData.serviceType === "rush-coursera" && (
                   <div className="space-y-2">
-                    <Label htmlFor="subService">Chi tiết Support Luk</Label>
+                    <Label htmlFor="subService">Chọn môn Rush Coursera</Label>
                     <Select 
                       value={bookingData.serviceDetails} 
                       onValueChange={(value) => handleInputChange("serviceDetails", value)}
                     >
                       <SelectTrigger>
-                        <SelectValue placeholder="Chọn loại Support Luk" />
+                        <SelectValue placeholder="Chọn môn học" />
                       </SelectTrigger>
                       <SelectContent>
-                        {supportLukOptions.map((option) => (
+                        {rushCourseraOptions.map((option) => (
+                          <SelectItem key={option.value} value={option.value}>
+                            {option.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                )}
+
+                {/* Khóa học cấp tốc sub-options */}
+                {bookingData.serviceType === "khoa-hoc" && (
+                  <div className="space-y-2">
+                    <Label htmlFor="subService">Chọn môn học cấp tốc</Label>
+                    <Select 
+                      value={bookingData.serviceDetails} 
+                      onValueChange={(value) => handleInputChange("serviceDetails", value)}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Chọn môn học" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {khoaHocOptions.map((option) => (
+                          <SelectItem key={option.value} value={option.value}>
+                            {option.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                )}
+
+                {/* Support Luk Check 2 sub-options */}
+                {bookingData.serviceType === "support-luk-check2" && (
+                  <div className="space-y-2">
+                    <Label htmlFor="subService">Chọn gói Check 2</Label>
+                    <Select 
+                      value={bookingData.serviceDetails} 
+                      onValueChange={(value) => handleInputChange("serviceDetails", value)}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Chọn gói Check 2" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {supportLukCheck2Options.map((option) => (
                           <SelectItem key={option.value} value={option.value}>
                             {option.label}
                           </SelectItem>

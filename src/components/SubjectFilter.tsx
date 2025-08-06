@@ -85,7 +85,12 @@ const SubjectFilter = () => {
                   className="bg-white rounded-lg p-4 shadow-soft hover:shadow-medium transition-all duration-300 hover:-translate-y-1 text-center"
                 >
                   <div className="font-semibold text-primary mb-2">{subject}</div>
-                  <Button size="sm" variant="outline" className="w-full text-xs">
+                  <Button 
+                    size="sm" 
+                    variant="outline" 
+                    className="w-full text-xs"
+                    onClick={() => window.open('https://docs.google.com/document/d/1THKvW20D4o-bPxCyrillclf1R5Z_29Os5EpOX6G--dw/edit?usp=sharing', '_blank')}
+                  >
                     Xem dịch vụ
                   </Button>
                 </div>

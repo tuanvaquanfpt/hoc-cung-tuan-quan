@@ -21,56 +21,88 @@ const ServicesSection = () => {
       color: "text-primary",
       bgColor: "bg-primary/10",
       cta: "Đặt dịch vụ",
-      price: "120-150k",
-      features: ["Tư vấn khóa học phù hợp", "Hỗ trợ làm bài tập", "Đảm bảo có chứng chỉ"]
+      price: "50-130k",
+      features: ["Hỗ trợ 4 môn học cụ thể", "Đảm bảo có chứng chỉ", "Tư vấn khóa học phù hợp"],
+      subServices: [
+        { icon: Code, name: "WED201", price: "130k" },
+        { icon: Code, name: "SSL101", price: "130k" },
+        { icon: Code, name: "CSI106", price: "50k" },
+        { icon: Code, name: "OBE102", price: "70k" }
+      ]
     },
     {
       id: 2,
       icon: BookOpen,
-      title: "Tài liệu & Source Code",
-      description: "Cung cấp đề thi cũ, bài giải mẫu, tài liệu PDF, và mã nguồn các môn lập trình, cơ sở dữ liệu, mạng,...",
+      title: "SRC ôn FE",
+      description: "Cung cấp đề thi cũ, bài giải mẫu, tài liệu PDF, và mã nguồn tất cả các môn học.",
       color: "text-secondary",
       bgColor: "bg-secondary/10",
       cta: "Đặt dịch vụ",
-      price: "50-70k",
-      features: ["Đề thi các năm trước", "Source code mẫu", "Tài liệu chất lượng cao"]
+      price: "60k",
+      features: ["Tất cả các môn học", "Đề thi các năm trước", "Source code đầy đủ"]
     },
     {
       id: 3,
       icon: Zap,
       title: "Khóa học cấp tốc online",
-      description: "Các khóa học rút gọn (2–5 buổi) giúp ôn thi hiệu quả, luyện đề và hiểu bài nhanh.",
+      description: "Các khóa học rút gọn (2–5 buổi) giúp ôn thi hiệu quả, đều được tặng tài liệu.",
       color: "text-primary",
       bgColor: "bg-primary/10",
       cta: "Đặt dịch vụ",
-      price: "100k",
-      features: ["Lộ trình ôn tập tối ưu", "Luyện đề thi thực tế", "Giải đáp thắc mắc 24/7"]
+      price: "120k/môn",
+      features: ["MAD101, MAE101, MAS291", "PRO192, PRF192, WED201", "Tặng kèm tài liệu đầy đủ"],
+      subServices: [
+        { icon: Code, name: "MAD101", price: "120k" },
+        { icon: Code, name: "MAE101", price: "120k" },
+        { icon: Code, name: "MAS291", price: "120k" },
+        { icon: Code, name: "PRO192", price: "120k" },
+        { icon: Code, name: "PRF192", price: "120k" },
+        { icon: Code, name: "WED201", price: "120k" }
+      ]
     },
     {
       id: 4,
       icon: Video,
-      title: "Support Luk",
-      description: "Dịch vụ toàn diện: làm project, check 2, debate với nhiều gói lựa chọn.",
+      title: "Support Luk - Làm Project",
+      description: "Hỗ trợ làm project các môn học theo yêu cầu cụ thể.",
       color: "text-secondary",
       bgColor: "bg-secondary/10",
       cta: "Đặt dịch vụ",
-      price: "10-90k",
-      features: ["Làm project", "Check 2 (4 gói)", "Dịch vụ debate"],
-      subServices: [
-        { icon: Code, name: "Làm project", price: "Liên hệ" },
-        { icon: FileText, name: "Check 2", 
-          options: [
-            { name: "Full combo", price: "90k" },
-            { name: "Chỉ kịch bản", price: "40k" },
-            { name: "Chỉ edit", price: "70k" },
-            { name: "Làm transcript", price: "10k" }
-          ]
-        },
-        { icon: Presentation, name: "Debate", price: "Liên hệ" }
-      ]
+      price: "Liên hệ",
+      features: ["Hỗ trợ tất cả môn học", "Code chất lượng cao", "Hỗ trợ 1-1"],
+      isProject: true
     },
     {
       id: 5,
+      icon: Edit3,
+      title: "Support Luk - Check 2",
+      description: "Dịch vụ Check 2 với 4 gói lựa chọn phù hợp với nhu cầu.",
+      color: "text-primary",
+      bgColor: "bg-primary/10",
+      cta: "Đặt dịch vụ",
+      price: "10-90k",
+      features: ["4 gói lựa chọn", "Chất lượng đảm bảo", "Giao hàng đúng hạn"],
+      subServices: [
+        { icon: FileText, name: "Full combo", price: "90k" },
+        { icon: FileText, name: "Chỉ kịch bản", price: "40k" },
+        { icon: FileText, name: "Chỉ edit", price: "70k" },
+        { icon: FileText, name: "Làm transcript", price: "10k" }
+      ]
+    },
+    {
+      id: 6,
+      icon: Presentation,
+      title: "Support Luk - Debate",
+      description: "Hỗ trợ chuẩn bị và thực hiện các buổi debate một cách chuyên nghiệp.",
+      color: "text-secondary",
+      bgColor: "bg-secondary/10",
+      cta: "Đặt dịch vụ",
+      price: "Liên hệ",
+      features: ["Chuẩn bị nội dung", "Hướng dẫn kỹ thuật", "Hỗ trợ thực hành"],
+      isProject: true
+    },
+    {
+      id: 7,
       icon: Code,
       title: "Hỗ trợ Lab & Project",
       description: "Hỗ trợ làm project, viết báo cáo, hoàn thiện bài lab theo môn học cụ thể (Java, Python, Web, DB,...).",
@@ -143,16 +175,6 @@ const ServicesSection = () => {
                               <span className="font-medium">{sub.name}</span>
                               {sub.price && <span className="text-primary font-bold ml-auto">{sub.price}</span>}
                             </div>
-                            {sub.options && (
-                              <div className="ml-6 space-y-1">
-                                {sub.options.map((option, optIdx) => (
-                                  <div key={optIdx} className="flex justify-between text-muted-foreground">
-                                    <span>• {option.name}</span>
-                                    <span className="text-primary font-medium">{option.price}</span>
-                                  </div>
-                                ))}
-                              </div>
-                            )}
                           </div>
                         );
                       })}

@@ -47,16 +47,36 @@ const FloatingChat = () => {
             </div>
 
             <div className="space-y-2">
-              <Button variant="outline" size="sm" className="w-full justify-start text-xs">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="w-full justify-start text-xs"
+                onClick={() => document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' })}
+              >
                 💡 Tư vấn chọn dịch vụ phù hợp
               </Button>
-              <Button variant="outline" size="sm" className="w-full justify-start text-xs">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="w-full justify-start text-xs"
+                onClick={() => window.open('https://docs.google.com/document/d/1THKvW20D4o-bPxCyrillclf1R5Z_29Os5EpOX6G--dw/edit?usp=sharing', '_blank')}
+              >
                 📚 Hỏi về tài liệu môn học
               </Button>
-              <Button variant="outline" size="sm" className="w-full justify-start text-xs">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="w-full justify-start text-xs"
+                onClick={() => document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' })}
+              >
                 ⚡ Đăng ký khóa ôn cấp tốc
               </Button>
-              <Button variant="outline" size="sm" className="w-full justify-start text-xs">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="w-full justify-start text-xs"
+                onClick={() => document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' })}
+              >
                 🎯 Hỗ trợ project/bài tập
               </Button>
             </div>
@@ -64,12 +84,33 @@ const FloatingChat = () => {
             <div className="border-t pt-3">
               <p className="text-xs text-muted-foreground mb-2">Hoặc liên hệ trực tiếp:</p>
               <div className="flex gap-2">
-                <Button variant="secondary" size="sm" className="flex-1 text-xs">
+                <Button 
+                  variant="secondary" 
+                  size="sm" 
+                  className="flex-1 text-xs"
+                  onClick={() => window.open('tel:0375020190')}
+                >
                   📱 Zalo
                 </Button>
-                <Button variant="secondary" size="sm" className="flex-1 text-xs">
-                  💬 Messenger
+                <Button 
+                  variant="secondary" 
+                  size="sm" 
+                  className="flex-1 text-xs"
+                  onClick={() => window.open('https://www.facebook.com/tuanvaquan', '_blank')}
+                >
+                  💬 Facebook
                 </Button>
+              </div>
+              <div className="mt-2">
+                <p className="text-xs text-muted-foreground text-center">
+                  📞 Hotline: 0375020190
+                </p>
+                <p className="text-xs text-muted-foreground text-center">
+                  📧 Email: lequan12305@gmail.com
+                </p>
+                <p className="text-xs text-red-500 text-center mt-1">
+                  ⚠️ Nếu có vấn đề về thanh toán, hãy liên hệ admin để được hỗ trợ
+                </p>
               </div>
             </div>
           </div>
